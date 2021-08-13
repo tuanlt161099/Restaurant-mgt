@@ -19,15 +19,9 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        // $token = $user->createToken('myapptoken')->plainTextToken;
-
-        // $data = [
-        //     'user' => $user,
-        //     'token' => $token,
-        // ];
+      
         $response = [
             "status" => "success",
-            "data" => [],
             "message" => "Registered success"
         ];
 
@@ -70,13 +64,8 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token,
         ];
-        $response = [
-            "status" =>"success",
-            "data" => $data,
-            "message" => "Logging successfully"
-        ];
-
-        return response($response, 201);
+        
+        return $this->responseSuccess("Login successfully", $data);
     }
 
 }
