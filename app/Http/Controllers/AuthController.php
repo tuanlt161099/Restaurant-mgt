@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\AuthRequest;
+use App\Http\Resources\test;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,6 +33,8 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
+
+        
     }
 
 
@@ -40,6 +43,7 @@ class AuthController extends Controller
         return [
             'message' => "Logged out"
         ];
+
     }
 
     public function login(Request $request){
@@ -66,14 +70,14 @@ class AuthController extends Controller
         };
 
         $token = $user->createToken('myapptoken')->plainTextToken;
-        $data = [ 
+        $data = [
             'user' => $user,
             'token' => $token,
         ];
         $response = [
             "status" =>"success",
             "data" => $data,
-            "message" => "Logging successfully"
+            "message" => "Loggin successfully"
         ];
 
         return response($response, 201);
