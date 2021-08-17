@@ -18,8 +18,6 @@ class CreateTypeFoodsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-
-
             $table->timestamps();
         });
     }
