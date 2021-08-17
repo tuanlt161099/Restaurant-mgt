@@ -14,13 +14,15 @@ class CreateBillFoodsTable extends Migration
     public function up()
     {
         Schema::create('bill_foods', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('bill_id')->unsigned()->nullable();
+            $table->id();
+            $table->bigInteger('bill_id')->unsigned()->nullable();
             $table->foreign('bill_id')->references('id')->on('bills')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('food_id')->unsigned()->nullable();
+            $table->bigInteger('food_id')->unsigned()->nullable();
             $table->foreign('food_id')->references('id')->on('food')->onUpdate('cascade')->onDelete('cascade');
             $table->float('food_quantity');
-            $table->float('dish_discount');
+            $table->float('food_price');
+            $table->float('food_discount');
+            $table->float('price_after_discount');
             $table->timestamps();
         });
     }
