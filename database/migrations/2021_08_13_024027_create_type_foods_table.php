@@ -14,7 +14,7 @@ class CreateTypeFoodsTable extends Migration
     public function up()
     {
         Schema::create('type_foods', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
