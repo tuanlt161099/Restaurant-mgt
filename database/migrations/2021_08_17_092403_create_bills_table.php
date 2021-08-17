@@ -17,11 +17,10 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->bigInteger('table_id')->unsigned()->nullable();
             $table->foreign('table_id')->references('id')->on('tables')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('employee_id')->unsigned()->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->float('total');
             $table->float('discount');
-            $table->float('total_after_discount');
 
             $table->timestamps();
         });
