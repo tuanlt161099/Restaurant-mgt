@@ -1,5 +1,7 @@
 <?php
+
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +19,23 @@ use Illuminate\Support\Facades\Route;
 
 
 //Public Route
-Route::post('/register',[AuthController::class, 'register']);
-Route::post('/login',[AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('list-table', [TableController::class, 'index']); //get list table
 
 //Prodtect Route
-Route::group(['middleware' => ['auth:sanctum']],function(){
-    Route::post('/logout',[AuthController::class, 'logout']);
-});
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+
+
+        //only admin can access
+        Route::middleware(['admin'])->group(function () {
+            Route::post('create-a-table',[TableController::class,'store']);//create a new table
+            Route::post('delete-table-{table}',[TableController::class,'destroy']);
+        });
+    });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
